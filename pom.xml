@@ -66,7 +66,7 @@
                 </configuration>
             </plugin>
         </plugins>
-        <finalName>docker-springboot-v2</finalName>
+        <finalName>docker-springboot-crud</finalName>
     </build>
 
 </project>

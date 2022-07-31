@@ -1,0 +1,56 @@
+version: "3"
+services:
+  ### postgres
+  postgres:
+    image: postgres:latest
+    ports:
+      - "35000:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_DB: postgres
+  api:
+    build:
+      dockerfile: Dockerfile
+      context: ./
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgresql://postgres:5432/postgres
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: mysecretpassword
+    ports:
+      - "8080:3100"
+
+
+
+
+
+
+
+
+
+
+#version: '3.8' #3.1
+#services:
+#  app:
+#    container_name: docker-springboot-crud
+#    image: docker-springboot-crud
+#    build: ./
+#    ports:
+#      - "8081:8081"
+#    depends_on:
+#      - postgresqldb
+#    environment:
+#      - SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/postgres
+#      - SPRING_DATASOURCE_USERNAME=postgres
+#      - SPRING_DATASOURCE_PASSWORD=mysecretpassword
+#      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+#  postgresqldb:
+#    image: postgres:10.4 #postgres
+#    ports:
+#      - "35000:5432" #5432
+#    environment:
+#      - POSTGRES_USER=postgres
+#      - POSTGRES_PASSWORD=mysecretpassword
+#      - POSTGRES_DB=postgres
